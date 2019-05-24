@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Tabs from './Tabs';
 import Cards from './Cards';
 
+
+
 // Importing our tab and card data. No need to change anything here.
 import { tabData, cardData } from '../../data';
 
@@ -23,7 +25,7 @@ export default class Content extends Component {
   }
 
   changeSelected = tab => {
-    // this function should take in the tab and update the state with the new tab.
+
     this.setState({selected:tab})
   }
   filterCards = () => {
@@ -47,44 +49,25 @@ export default class Content extends Component {
    return cards;
 
 
-    //return this.state.cards;
   };
-  //not working 
-  // selectedTab = (e) => {
-  //   e.preventDefault();
-  //   // if(this.state.selected[0] = this.state.tabs){
-  //   //   return 'tab active-tab'
-  //   // }else{ return  'tab'}
 
-  // }
-
-//working
-  // selectTabHandler = (calling) => {
-  //     //this.setState({this.state.selected:this.state.tab
-  //   // const newselected = [
-  //   //   calling
-  //   // ]
-  //   //   this.setState({
-  //   //       selected:{...this.state.selected = newselected}
-
-  //   //   })
-  //   //    console.log('click',this.state.selected[0],2,'clicking:',calling,3)
-  // }
 
 
   render() {
     return (
       <div className="content-container">
+
         {/* 
           Add 2 props to the Tabs component, 
           `selectedTab` that includes the currently selected tab
           and `selectTabHandler` that includes the function to change the selected tab
         */}
-
+        {console.log(this.state.selected)}
         <Tabs 
         tabs={this.state.tabs} 
-        selectTabHandler={this.selectTabHandler}
+        selectTabHandler={this.changeSelected}
         selectedTab={this.state.selected}
+
         />
         <Cards cards={this.filterCards()} />
       </div>
