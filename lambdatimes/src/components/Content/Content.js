@@ -24,59 +24,52 @@ export default class Content extends Component {
 
   changeSelected = tab => {
     // this function should take in the tab and update the state with the new tab.
-    this.setState({})
-  };
-
+    this.setState({selected:tab})
+  }
   filterCards = () => {
     /* Right now this function only returns the cards on state.
       We're going to make this function more dynamic
       by using it to filter out our cards for when a tab is selcted
-      
       Notice that we're passing this function to our <Cards /> component below.
       This function returns an array of cards, so we can just pass it down as such.
-
       Your algorithim for the logic here is as follows: 
         - if the selected tab is 'all' it should return all 
           of the items from cardData. 
         - else, it should only return those cards whose 'tab' matched this.state.selected.
     */
-   if (this.state.selected === 'all'){
-     return this.state.cards
-   }else{     
+   const cards = this.state.cards.filter(card => {
+    if(this.state.selected === 'all') {
+     return this.state.cards;
+    } else if (this.state.selected === card.tab) {
+      return card;
+    }
+  })
+   return cards;
 
-      return this.state.cards.filter(i=>{
-         i.tab === this.state.selected
-      })
-  
-     //  this.state.cards.filter(i=>{ i.tab == this.state.selected[0]
-    //   console.log(this.state.selected[0],i.tab)})
 
-   }
-  //  }else if(this.state.cards.tab === this.state.selected){
-  //     this.state.cards.tabs
-  //  }
-
-    return this.state.cards;
+    //return this.state.cards;
   };
   //not working 
-  selectedTab = (e) => {
-    e.preventDefault();
+  // selectedTab = (e) => {
+  //   e.preventDefault();
+  //   // if(this.state.selected[0] = this.state.tabs){
+  //   //   return 'tab active-tab'
+  //   // }else{ return  'tab'}
 
-    console.log(this.state.selected[0],"select")
-  }
+  // }
 
 //working
-  selectTabHandler = (calling) => {
-      //this.setState({this.state.selected:this.state.tab
-    const newselected = [
-      calling
-    ]
-      this.setState({
-          selected:[...this.state.selected = newselected]
+  // selectTabHandler = (calling) => {
+  //     //this.setState({this.state.selected:this.state.tab
+  //   // const newselected = [
+  //   //   calling
+  //   // ]
+  //   //   this.setState({
+  //   //       selected:{...this.state.selected = newselected}
 
-      })
-       console.log('click',this.state.selected[0],2,'clicking:',calling,3)
-  }
+  //   //   })
+  //   //    console.log('click',this.state.selected[0],2,'clicking:',calling,3)
+  // }
 
 
   render() {
@@ -87,11 +80,11 @@ export default class Content extends Component {
           `selectedTab` that includes the currently selected tab
           and `selectTabHandler` that includes the function to change the selected tab
         */}
-    {console.log(this.state.selected,"select")}
+
         <Tabs 
         tabs={this.state.tabs} 
         selectTabHandler={this.selectTabHandler}
-        selectedTab={this.selectedTab}
+        selectedTab={this.state.selected}
         />
         <Cards cards={this.filterCards()} />
       </div>
