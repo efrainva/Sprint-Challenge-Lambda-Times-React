@@ -40,29 +40,42 @@ export default class Content extends Component {
           of the items from cardData. 
         - else, it should only return those cards whose 'tab' matched this.state.selected.
     */
-  //  if (this.state.tabs === 'all'){
-  //     this.state.cards
+   if (this.state.selected === 'all'){
+     return this.state.cards
+   }else{     
+
+      return this.state.cards.filter(i=>{
+         i.tab === this.state.selected
+      })
+  
+     //  this.state.cards.filter(i=>{ i.tab == this.state.selected[0]
+    //   console.log(this.state.selected[0],i.tab)})
+
+   }
   //  }else if(this.state.cards.tab === this.state.selected){
   //     this.state.cards.tabs
   //  }
+
     return this.state.cards;
   };
+  //not working 
   selectedTab = (e) => {
     e.preventDefault();
-    console.log(this.state.selected,"select")
+
+    console.log(this.state.selected[0],"select")
   }
 
-
+//working
   selectTabHandler = (calling) => {
       //this.setState({this.state.selected:this.state.tab
-    const newselected = {
-      selected:calling
-    }
+    const newselected = [
+      calling
+    ]
       this.setState({
           selected:[...this.state.selected = newselected]
 
       })
-       console.log('click',this.state.selected,'clicking:',calling)
+       console.log('click',this.state.selected[0],2,'clicking:',calling,3)
   }
 
 
@@ -74,7 +87,7 @@ export default class Content extends Component {
           `selectedTab` that includes the currently selected tab
           and `selectTabHandler` that includes the function to change the selected tab
         */}
-
+    {console.log(this.state.selected,"select")}
         <Tabs 
         tabs={this.state.tabs} 
         selectTabHandler={this.selectTabHandler}
